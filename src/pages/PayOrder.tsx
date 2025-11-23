@@ -38,9 +38,14 @@ const PayOrder = () => {
     return null;
   }
 
-  // Generate fake QR code using a placeholder service
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(`AIMS-${currentOrder.id}-${currentOrder.total}`)}`;
+  // Cấu hình tài khoản ngân hàng nhận tiền (VietQR)
+  const BANK_ID = 'TPBank'; // Ngân hàng (ví dụ: MB, VCB, ACB...)
+  const ACCOUNT_NO = 'Q1111111'; // Số tài khoản nhận tiền (Thay số của bạn vào nếu muốn test thật)
+  const ACCOUNT_NAME = 'Vu Duc Viet Anh'; // Tên chủ tài khoản
+  const TEMPLATE = 'compact2'; // Giao diện QR (compact, compact2, qr_only, print)
 
+  // Tạo link ảnh QR VietQR động
+  const qrCodeUrl = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png?amount=${currentOrder.total}&addInfo=${encodeURIComponent(`Thanh toan don ${currentOrder.id}`)}&accountName=${encodeURIComponent(ACCOUNT_NAME)}`;
   const handleComplete = () => {
     if (currentOrder) {
       // Remove ordered items from cart after successful payment
