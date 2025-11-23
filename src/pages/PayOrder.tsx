@@ -9,7 +9,7 @@ import './PayOrder.css';
 const PayOrder = () => {
   const navigate = useNavigate();
   const { currentOrder, setCurrentOrder } = useOrder();
-  const { getCartCount } = useCart();
+  const { getCartCount, removeFromCart } = useCart();
 
   useEffect(() => {
     if (!currentOrder) {
@@ -42,9 +42,13 @@ const PayOrder = () => {
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(`AIMS-${currentOrder.id}-${currentOrder.total}`)}`;
 
   const handleComplete = () => {
+    if (currentOrder) {
+      // Remove ordered items from cart after successful payment
+      currentOrder.items.forEach(item => removeFromCart(item.id));
+    }
     setCurrentOrder(null);
     alert('Cảm ơn bạn đã thanh toán! Đơn hàng của bạn đang được xử lý.');
-    navigate('/');
+    navigate('/cart');
   };
 
   return (

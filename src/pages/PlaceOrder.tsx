@@ -8,7 +8,7 @@ import './PlaceOrder.css';
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
-  const { getSelectedItems, getTotalPrice, getCartCount, removeFromCart } = useCart();
+  const { getSelectedItems, getTotalPrice, getCartCount } = useCart();
   const { createOrder } = useOrder();
 
   const [formData, setFormData] = useState({
@@ -69,8 +69,6 @@ const PlaceOrder = () => {
     
     if (validateForm()) {
       createOrder(selectedItems, formData, total);
-      // Remove selected items from cart
-      selectedItems.forEach(item => removeFromCart(item.id));
       navigate('/pay-order');
     }
   };
