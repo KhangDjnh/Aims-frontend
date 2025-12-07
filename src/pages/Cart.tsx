@@ -1,3 +1,22 @@
+/*
+* ĐÁNH GIÁ THIẾT KẾ MÔ-ĐUN
+* ---------------------------------------------------------
+* 1. COUPLING:
+*    - Mức độ: Content Coupling
+*    - Với lớp nào: CartContext (useCart hook)
+*    - Lý do: Cart component phụ thuộc trực tiếp vào các method của CartContext (updateQuantity, removeFromCart, toggleSelect, selectAll, deselectAll, getTotalPrice, getSelectedItems, getCartCount)
+*
+*    - Mức độ: Content Coupling
+*    - Với lớp nào: React Router (useNavigate)
+*    - Lý do: Cart component phụ thuộc vào navigation để điều hướng sang các page khác
+*
+* 2. COHESION:
+*    - Mức độ: Sequential Cohesion
+*    - Giữa các thành phần: [handlePlaceOrder, allSelected, hasSelectedItems, formatPrice, render empty cart state, render cart items list, render cart summary]
+*    - Lý do: Các phần được tổ chức theo trình tự logic: kiểm tra giỏ hàng rỗng -> hiển thị giỏ hàng -> xử lý thao tác -> tính tổng cộng, nhưng chúng liên quan đến cùng một mục đích (quản lý hiển thị giỏ hàng)
+* ---------------------------------------------------------
+*/
+
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import Navbar from '../components/Navbar';

@@ -1,3 +1,26 @@
+/*
+* ĐÁNH GIÁ THIẾT KẾ MÔ-ĐUN
+* ---------------------------------------------------------
+* 1. COUPLING:
+*    - Mức độ: Content Coupling
+*    - Với lớp nào: CartContext (useCart hook)
+*    - Lý do: PlaceOrder component phụ thuộc trực tiếp vào methods của CartContext (getSelectedItems, getTotalPrice, getCartCount) để lấy thông tin đơn hàng
+*
+*    - Mức độ: Content Coupling
+*    - Với lớp nào: OrderContext (useOrder hook)
+*    - Lý do: PlaceOrder component gọi trực tiếp createOrder method từ OrderContext để tạo đơn hàng
+*
+*    - Mức độ: Data Coupling
+*    - Với lớp nào: React Router (useNavigate)
+*    - Lý do: PlaceOrder component sử dụng navigation để điều hướng giữa các trang
+*
+* 2. COHESION:
+*    - Mức độ: Sequential Cohesion
+*    - Giữa các thành phần: [formData state, validateForm, handleChange, handleSubmit, useEffect check selectedItems, form rendering, order summary rendering]
+*    - Lý do: Các phần được tổ chức theo trình tự: kiểm tra dữ liệu -> xác thực form -> xử lý submit -> hiển thị form và tóm tắt đơn hàng, tất cả liên quan đến mục đích đặt hàng
+* ---------------------------------------------------------
+*/
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';

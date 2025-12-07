@@ -1,3 +1,22 @@
+/*
+* ĐÁNH GIÁ THIẾT KẾ MÔ-ĐUN
+* ---------------------------------------------------------
+* 1. COUPLING:
+*    - Mức độ: Stamp Coupling
+*    - Với lớp nào: Product, CartItem interfaces
+*    - Lý do: CartContext nhận/trả về các object Product và CartItem với nhiều thuộc tính, không chỉ những thành phần cần thiết
+*
+*    - Mức độ: Data Coupling
+*    - Với lớp nào: Component sử dụng useCart hook
+*    - Lý do: Các component phụ thuộc vào dữ liệu cụ thể từ context (cartItems, getTotalPrice, v.v.)
+*
+* 2. COHESION:
+*    - Mức độ: Functional Cohesion
+*    - Giữa các thành phần: [cartItems, addToCart, removeFromCart, updateQuantity, toggleSelect, selectAll, deselectAll, getCartCount, getTotalPrice, getSelectedItems, clearCart]
+*    - Lý do: Tất cả các method/state đều liên quan đến quản lý giỏ hàng, cùng mục đích chính là xử lý các thao tác trên giỏ hàng
+* ---------------------------------------------------------
+*/
+
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Product {
